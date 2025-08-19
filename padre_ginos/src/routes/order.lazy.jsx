@@ -24,7 +24,7 @@ export default function Order() {
   async function checkout() {
     setLoading(true);
 
-    await fetch('/api/order', {
+    await fetch('../../api/order', {
       method: 'post',
       headers: {
         'Content-type': 'application/json',
