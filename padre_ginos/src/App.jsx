@@ -1,47 +1,22 @@
-import { createRoot } from "react-dom/client";
-import Pizza from "./Pizza";
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { RouterProvider, createRouter } from '@tanstack/react-router';
+import { routeTree } from './routeTree.gen';
 
-// const Pizza = ({ name, description }) => {
-//   return React.createElement("div", {}, [
-//     React.createElement("h1", {}, name),
-//     React.createElement("p", {}, description),
-//   ]);
-// };
-
-// const App = () => {
-//   return React.createElement("div", {}, [
-//     React.createElement("h1", {}, "Chester's pizza shop"),
-//     React.createElement(Pizza, {
-//       name: "Chester one",
-//       description: "Cheese & tomato",
-//     }),
-//     React.createElement(Pizza, {
-//       name: "Chester two",
-//       description: "Cheese & tomato",
-//     }),
-//     React.createElement(Pizza, {
-//       name: "Chester three",
-//       description: "Cheese & tomato",
-//     }),
-//     React.createElement(Pizza, {
-//       name: "Chester four",
-//       description: "Cheese & tomato",
-//     }),
-//   ]);
-// };
+const router = createRouter({ routeTree });
+const queryClient = new QueryClient();
 
 const App = () => {
   return (
-    <>
-    <h1>x Chester's pizza restaurant x</h1>
-    <Pizza name='Chester one' description='Cheese & tomato'/>
-    <Pizza name='Chester two' description='Cheese & tomato'/>
-    <Pizza name='Chester three' description='Cheese & tomato'/>
-    <Pizza name='Chester four' description='Cheese & tomato'/>
-    </>
+    <StrictMode>
+      <QueryClientProvider client={queryClient}>
+      <RouterProvider router={router} />
+      </QueryClientProvider>
+    </StrictMode>
   );
 };
 
-const container = document.getElementById("root");
+const container = document.getElementById('root');
 const root = createRoot(container);
-root.render(<App/>);
+root.render(<App />);
